@@ -36,7 +36,9 @@ public class TurnoverChecklistServiceImpl implements TurnoverChecklistService {
     public List<TurnoverChecklistResponse> getByTurnover(Long turnoverId) {
         ensureTurnoverExists(turnoverId);
         return repository.findByTurnoverId(turnoverId)
-                .stream().map(TurnoverChecklistMapper::toResponse).toList();
+                .stream()
+                .map(TurnoverChecklistMapper::toResponse)
+                .toList();
     }
 
     @Override

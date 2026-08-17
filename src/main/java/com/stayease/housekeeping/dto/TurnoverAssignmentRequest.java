@@ -25,4 +25,5 @@ public record TurnoverAssignmentRequest(
 
         TurnoverStatus status
 ) {
+
 }

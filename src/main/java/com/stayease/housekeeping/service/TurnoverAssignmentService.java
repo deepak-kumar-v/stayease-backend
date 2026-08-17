@@ -17,6 +17,5 @@ public interface TurnoverAssignmentService {
 
     void delete(Long id);
 
-    /** Existence check used by the TurnoverChecklist sub-module. */
     boolean existsById(Long id);
 }

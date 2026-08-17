@@ -4,7 +4,9 @@
       "WebFetch(domain:springdoc.org)",
       "WebFetch(domain:central.sonatype.com)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:repo1.maven.org)"
+      "WebFetch(domain:repo1.maven.org)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
     ]
   }
 }

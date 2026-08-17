@@ -11,18 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-/**
- * The central security configuration.
- *
- * Reads top-to-bottom in filterChain():
- *  - CSRF disabled: we're a stateless token API, not a cookie/session web app.
- *  - authorizeHttpRequests: the RBAC rules. First match wins, so list the
- *    specific rules before the catch-all anyRequest().
- *  - STATELESS sessions: never create an HttpSession; every request must carry
- *    its own JWT.
- *  - our JWT filter runs before Spring's username/password filter so an
- *    incoming token is turned into an authenticated principal first.
- */
 @Configuration
 public class SecurityConfig {
 
@@ -49,28 +37,30 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // public: register & login
-                        .requestMatchers("/api/auth/**").permitAll()
-                        // user management: admins only
+
+                        .requestMatchers("/api/auth/**")
+                        .permitAll()
+
                         .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        .requestMatchers("/api/users/**").hasRole("ADMIN")
-                        // audit trail: admins & finance
-                        .requestMatchers("/api/audit-logs/**").hasAnyRole("ADMIN", "FINANCE")
-                        // financial postings: admins & finance
+
+                        .requestMatchers("/api/users/**")
+                        .hasRole("ADMIN")
+
+                        .requestMatchers("/api/audit-logs/**")
+                        .hasAnyRole("ADMIN", "FINANCE")
+
                         .requestMatchers("/api/owner-statements/**", "/api/owner-payouts/**")
                         .hasAnyRole("ADMIN", "FINANCE")
-                        // everything else: any authenticated user
 
-                        /// /// testing ongoing
                         .requestMatchers("/api/check-ins/**")
                         .hasAnyRole("GUEST", "PROPERTY_MANAGER")
-                        /// ///
 
                         .anyRequest().authenticated())
+
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(eh -> eh
                         .authenticationEntryPoint(authenticationEntryPoint) // 401
@@ -80,17 +70,19 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /** BCrypt: a slow, salted hash designed for passwords. */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    /**
-     * Exposes the AuthenticationManager. Because we have a UserDetailsService
-     * bean (CustomUserDetailsService) and a PasswordEncoder bean, Spring wires
-     * them into it automatically, so login can verify email + password.
-     */
+
+
+
+
+
+
+
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

@@ -14,11 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Turnover assignments tie together a property, the two reservations either
- * side of the cleaning, and the housekeeping user doing the work — so this
- * service validates all of the ids that were supplied.
- */
 @Service
 @Transactional
 public class TurnoverAssignmentServiceImpl implements TurnoverAssignmentService {
@@ -56,7 +51,9 @@ public class TurnoverAssignmentServiceImpl implements TurnoverAssignmentService 
         } else {
             list = repository.findAll();
         }
-        return list.stream().map(TurnoverAssignmentMapper::toResponse).toList();
+        return list.stream()
+                .map(t -> TurnoverAssignmentMapper.toResponse(t))
+                .toList();
     }
 
     @Override

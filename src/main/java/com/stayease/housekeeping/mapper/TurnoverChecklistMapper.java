@@ -43,32 +43,3 @@ public final class TurnoverChecklistMapper {
 }
 
 
-//package com.stayease.housekeeping.mapper;
-//
-//import com.stayease.housekeeping.dto.TurnoverChecklistRequest;
-//import com.stayease.housekeeping.dto.TurnoverChecklistResponse;
-//import com.stayease.housekeeping.entity.TurnoverChecklist;
-//import com.stayease.housekeeping.enums.ChecklistStatus;
-//import org.mapstruct.AfterMapping;
-//import org.mapstruct.Mapper;
-//import org.mapstruct.Mapping;
-//import org.mapstruct.MappingTarget;
-//
-//@Mapper(componentModel = "spring")
-//public interface TurnoverChecklistMapper {
-//
-//    @Mapping(target = "completed", expression = "java(Boolean.TRUE.equals(request.completed()))")
-//    TurnoverChecklist toEntity(TurnoverChecklistRequest request);
-//
-//    @Mapping(target = "completed", expression = "java(Boolean.TRUE.equals(request.completed()))")
-//    void updateEntity(@MappingTarget TurnoverChecklist c, TurnoverChecklistRequest request);
-//
-//    TurnoverChecklistResponse toResponse(TurnoverChecklist c);
-//
-//    @AfterMapping
-//    default void applyDefaultStatus(TurnoverChecklistRequest request, @MappingTarget TurnoverChecklist c) {
-//        if (request.status() == null) {
-//            c.setStatus(ChecklistStatus.PENDING);
-//        }
-//    }
-//}

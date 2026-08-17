@@ -47,31 +47,3 @@ public final class TurnoverAssignmentMapper {
 }
 
 
-//
-//
-//package com.stayease.housekeeping.mapper;
-//
-//import com.stayease.housekeeping.dto.TurnoverAssignmentRequest;
-//import com.stayease.housekeeping.dto.TurnoverAssignmentResponse;
-//import com.stayease.housekeeping.entity.TurnoverAssignment;
-//import com.stayease.housekeeping.enums.TurnoverStatus;
-//import org.mapstruct.AfterMapping;
-//import org.mapstruct.Mapper;
-//import org.mapstruct.MappingTarget;
-//
-//@Mapper(componentModel = "spring")
-//public interface TurnoverAssignmentMapper {
-//
-//    TurnoverAssignment toEntity(TurnoverAssignmentRequest request);
-//
-//    void updateEntity(@MappingTarget TurnoverAssignment t, TurnoverAssignmentRequest request);
-//
-//    TurnoverAssignmentResponse toResponse(TurnoverAssignment t);
-//
-//    @AfterMapping
-//    default void applyDefaultStatus(TurnoverAssignmentRequest request, @MappingTarget TurnoverAssignment t) {
-//        if (request.status() == null) {
-//            t.setStatus(TurnoverStatus.PENDING);
-//        }
-//    }
-//}

@@ -11,14 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-/**
- * Returns a clean 401 JSON body when an unauthenticated request hits a
- * protected endpoint. Security runs in the servlet filter chain, BEFORE Spring
- * MVC, so our @RestControllerAdvice never sees these — hence this handler.
- *
- * We hand-build the small JSON string rather than inject an ObjectMapper, which
- * keeps these two handlers free of any Jackson-version coupling.
- */
+
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

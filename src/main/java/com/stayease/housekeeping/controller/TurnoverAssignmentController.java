@@ -34,18 +34,18 @@ public class TurnoverAssignmentController {
         return service.create(request);
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TurnoverAssignmentResponse getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<TurnoverAssignmentResponse> getAll(
             @RequestParam(required = false) Long propertyId,
             @RequestParam(required = false) Long assignedToId) {
         return service.getAll(propertyId, assignedToId);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public TurnoverAssignmentResponse getById(@PathVariable Long id) {
-        return service.getById(id);
     }
 
     @PutMapping("/{id}")
